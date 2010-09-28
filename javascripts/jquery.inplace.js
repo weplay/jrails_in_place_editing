@@ -268,12 +268,14 @@ jQuery.fn.editInPlace = function(options) {
 						original_element.html(original_html);
 						alert("Error: You must enter a value to save this field");
 					} else {
+						var postData = {}
+  						postData[settings.update_value] = new_html;
+						postData[settings.element_id] = original_element.attr("id") + settings.params ;
+						postData[settings.original_html] = original_html;
 						jQuery.ajax({
 							url: settings.url,
 							type: "POST",
-							data: settings.update_value + '=' + new_html + '&' + settings.element_id + '=' + 
-									original_element.attr("id") + settings.params + 
-									'&' + settings.original_html + '=' + original_html,
+							data: postData,
 							dataType: "html",
 							complete: function(request){
 								editing = false;
