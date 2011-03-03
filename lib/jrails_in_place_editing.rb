@@ -1,3 +1,5 @@
+require 'jrails_in_place_macros_helper'
+
 module InPlaceEditing
   def self.included(base)
     base.extend(ClassMethods)
@@ -26,3 +28,6 @@ module InPlaceEditing
     end
   end
 end
+
+ActionController::Base.send :include, InPlaceEditing
+ActionController::Base.helper InPlaceMacrosHelper
